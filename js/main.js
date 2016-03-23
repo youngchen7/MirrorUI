@@ -1,4 +1,20 @@
 // Main JS for managing the widget framework ///////////////////////////////////
+
+// MAIN BEGIN //////////////////////////////////////////////////////////////////
+$(document).ready(function()
+{
+  print("Resolution: " + window.screen.width + " x " + window.screen.height);
+  print("Available resolution: " + window.innerWidth + " x " + window.innerHeight);
+
+  // Default values
+  set_cell_square(100);
+  add_iframe("http://gizmodo.com/", 0, 0, 2, 2);
+  // Initial draw
+  calculate_grid();
+  draw_grid();
+  draw_iframes();
+});
+
 // Variables
 var FLAG_DEBUG = true;
 var FLAG_RESIZE_CELL = false;
@@ -28,7 +44,7 @@ function add_iframe(source, x, y, width, height)
   var new_iframe = document.createElement("iframe");
   if_info.push({"element": new_iframe, "x": x, "y": y, "width": width, "height": height})
   new_iframe.style.position = "absolute";
-  new_iframe.frameborder = "0";
+  new_iframe.frameBorder = 0;
   new_iframe.src = source;
   document.body.appendChild(new_iframe);
 }
@@ -49,6 +65,7 @@ function calculate_grid() // Calculate grid
   if(FLAG_RESIZE_CELL)  // Calculate cell size from columns/rows
   {
     console.log("Not yet implemented!");
+    // TODO
   }
   else // Calculate columns/rows from cell size
   {
@@ -100,22 +117,6 @@ function draw_grid() // Draw the grid onto the svg background
 // Window resize handler - Recalculates grid ///////////////////////////////////
 $( window ).resize(function() {
   print("Resized - Available resolution: " + window.innerWidth + " x " + window.innerHeight);
-  calculate_grid();
-  draw_grid();
-  draw_iframes();
-});
-
-
-// MAIN BEGIN //////////////////////////////////////////////////////////////////
-$(document).ready(function()
-{
-  print("Resolution: " + window.screen.width + " x " + window.screen.height);
-  print("Available resolution: " + window.innerWidth + " x " + window.innerHeight);
-
-  // Default values
-  set_cell_square(100);
-  add_iframe("http://gizmodo.com/", 0, 0, 2, 2);
-  // Initial draw
   calculate_grid();
   draw_grid();
   draw_iframes();
